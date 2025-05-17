@@ -8,8 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2023",
     "sourceMap": true,
-    "outDir": "./dist",
-    "incremental": true,
+    "incremental": false,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,10 +17,14 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": "./src",
+    "tsBuildInfoFile": "./.tsbuildinfo",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./*"]
     }
   },
-  "include": ["src/**/*", "scripts/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test"]
 }
