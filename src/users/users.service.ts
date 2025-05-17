@@ -15,10 +15,8 @@ export class UsersService {
   async createUser(createUserDto: CreateUserDto) {
     const { phone, name, surname, email } = createUserDto;
 
-    // Verificar si existe usuario por teléfono
     const userExists = await this.prisma.user.findUnique({ where: { phone } });
     if (userExists) {
-      // Podés retornar el usuario existente o lanzar error si querés
       return userExists;
     }
 
@@ -36,7 +34,7 @@ export class UsersService {
     return user;
   }
 
-  async findByPhone(phone: string) {
-    return this.prisma.user.findUnique({ where: { phone } });
+  async findByEmail(email: string) {
+    return this.prisma.user.findUnique({ where: { email } });
   }
 }

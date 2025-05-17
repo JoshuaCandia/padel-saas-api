@@ -10,8 +10,10 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(phone: string, pass: string) {
-    const user = await this.usersService.findByPhone(phone);
+  async validateUser(email: string, pass: string) {
+    if (!email) throw new UnauthorizedException('Email is required');
+
+    const user = await this.usersService.findByEmail(email);
 
     if (!user || !user.password) {
       throw new UnauthorizedException('Invalid credentials');

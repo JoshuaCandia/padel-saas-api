@@ -20,9 +20,9 @@ export class UsersController {
     return safeUser;
   }
 
-  @Get('by-phone/:phone')
-  async getByPhone(@Param('phone') phone: string) {
-    const user = await this.usersService.findByPhone(phone);
+  @Get('by-email/:email')
+  async getByPhone(@Param('email') email: string) {
+    const user = await this.usersService.findByEmail(email);
     if (!user) throw new NotFoundException();
     const { password, ...safeUser } = user;
     return safeUser;

@@ -6,7 +6,6 @@ import {
   Patch,
   Delete,
   Param,
-  Query,
   Get,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
