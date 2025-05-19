@@ -1,9 +1,9 @@
 // src/reservations/reservations.service.ts
 
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateReservationDto } from './dto/create-reservation.dto';
+import { Injectable } from '@nestjs/common';
+import { CreateReservationDto } from '../dto/create-reservation.dto';
 import { PrismaService } from '@/common/infraestructure/prisma/prisma.service';
-import { ReservationValidatorService } from '@/common/services/reservation-validator.service';
+import { ReservationValidatorService } from '../validators/reservation-validator.service';
 
 @Injectable()
 export class ReservationsService {
