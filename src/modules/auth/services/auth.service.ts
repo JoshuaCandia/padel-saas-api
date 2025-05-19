@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { AuthRepository } from '../repositories/auth.repository';
 
 interface JwtPayload {
   phone: string;
@@ -12,14 +12,16 @@ interface JwtPayload {
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly usersService: UsersService,
+    private readonly authRepo: AuthRepository,
     private readonly jwtService: JwtService,
   ) {}
 
   async validateUser(email: string, pass: string) {
-    if (!email) throw new UnauthorizedException('Email is required');
+    if (!email) {
+      throw new UnauthorizedException('Email is required');
+    }
 
-    const user = await this.usersService.findByEmail(email);
+    const user = await this.authRepo.findByEmail(email);
     if (!user || !user.password) {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -29,15 +31,13 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
+    // Quitar la contraseña del objeto
     const { password, ...userWithoutPassword } = user;
     return userWithoutPassword;
   }
 
-  private async comparePasswords(
-    plainText: string,
-    hashed: string,
-  ): Promise<boolean> {
-    return bcrypt.compare(plainText, hashed);
+  private comparePasswords(plain: string, hashed: string): Promise<boolean> {
+    return bcrypt.compare(plain, hashed);
   }
 
   async login(user: { id: string; phone: string; role: string }) {
