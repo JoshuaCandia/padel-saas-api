@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard } from '@/auth/roles.ward';
+import { RolesGuard } from '@/modules/auth/roles.ward';
 import { Roles } from '../auth/roles.decorator';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
@@ -53,11 +53,5 @@ export class AdminController {
   @Roles('ADMIN')
   markAsAbsent(@Param('id') id: string) {
     return this.adminService.markAsAbsent(id);
-  }
-
-  @Post('reservations/suspend')
-  @Roles('ADMIN')
-  suspendCourt(@Body() body: { courtId: string; date: string }) {
-    return this.adminService.suspendCourt(body.courtId, body.date);
   }
 }

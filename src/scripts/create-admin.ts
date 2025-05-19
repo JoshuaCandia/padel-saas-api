@@ -6,7 +6,7 @@ async function main() {
 
   const email = 'joshuacandia99@gmail.com';
   const passwordPlain = '94140462321456';
-  const phone = '1141739482'; // un teléfono ficticio para admin
+  const phone = '1141739482';
   const name = 'Joshua';
   const surname = 'Candia';
 

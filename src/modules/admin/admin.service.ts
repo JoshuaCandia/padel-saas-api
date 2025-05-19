@@ -59,20 +59,4 @@ export class AdminService {
   async markAsAbsent(id: string) {
     return this.updateReservation(id, { isAbsent: true });
   }
-
-  async suspendCourt(courtId: string, date: string) {
-    return this.prisma.reservation.create({
-      data: {
-        time: '00:00',
-        courtId,
-        date,
-        phone: 'ADMIN',
-        name: 'SUSPENDIDO',
-        surname: '',
-        email: 'suspendido@admin.com',
-        isPermanent: false,
-        isAbsent: false,
-      },
-    });
-  }
 }

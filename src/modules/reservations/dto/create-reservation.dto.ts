@@ -1,33 +1,34 @@
-// src/reservations/dto/create-reservation.dto.ts
 import {
-  IsString,
   IsDateString,
   IsBoolean,
-  IsOptional,
+  IsString,
   IsNotEmpty,
+  IsEmail,
 } from 'class-validator';
 
 export class CreateReservationDto {
   @IsDateString()
-  date: string;
+  start: string;
+
+  @IsDateString()
+  end: string;
 
   @IsBoolean()
   isPermanent: boolean;
 
   @IsString()
   @IsNotEmpty()
-  time: string;
-
-  @IsString()
   phone: string;
 
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsString()
+  @IsNotEmpty()
   surname: string;
 
-  @IsString()
+  @IsEmail()
   email: string;
 
   @IsString()

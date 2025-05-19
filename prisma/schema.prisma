@@ -24,10 +24,10 @@ model Reservation {
   surname     String
   phone       String
   email       String
-  date        String
-  time        String
+  start       DateTime
+  end         DateTime
   isPermanent Boolean
-  isAbsent    Boolean  @default(false) // <--- esto es lo nuevo
+  isAbsent    Boolean  @default(false)
   courtId     String
   court       Court    @relation(fields: [courtId], references: [id])
   createdAt   DateTime @default(now())
@@ -38,7 +38,7 @@ model Reservation {
 model Court {
   id           String        @id @default(uuid())
   name         String
-  reservations Reservation[] // Relación con las reservas
+  reservations Reservation[]
 }
 
 enum Role {

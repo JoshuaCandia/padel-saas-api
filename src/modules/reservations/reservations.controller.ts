@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Param, Query } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 
@@ -14,5 +14,10 @@ export class ReservationsController {
   @Get()
   async findAll() {
     return this.reservationsService.findAll();
+  }
+
+  @Get()
+  async findByDate(@Query('start') start: string) {
+    return this.reservationsService.findByDate(start);
   }
 }

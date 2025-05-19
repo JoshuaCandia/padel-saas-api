@@ -8,6 +8,7 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL,
     "surname" TEXT NOT NULL,
     "email" TEXT,
+    "password" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -20,9 +21,10 @@ CREATE TABLE "Reservation" (
     "surname" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "date" TEXT NOT NULL,
-    "time" TEXT NOT NULL,
+    "start" TIMESTAMP(3) NOT NULL,
+    "end" TIMESTAMP(3) NOT NULL,
     "isPermanent" BOOLEAN NOT NULL,
+    "isAbsent" BOOLEAN NOT NULL DEFAULT false,
     "courtId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" TEXT,
