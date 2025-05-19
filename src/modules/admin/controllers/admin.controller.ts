@@ -9,9 +9,9 @@ import {
   Get,
 } from '@nestjs/common';
 import { AdminService } from '../services/admin.service';
-import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
-import { RolesGuard } from '@/modules/auth/roles.ward';
-import { Roles } from '../../auth/roles.decorator';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '@/modules/auth/guards/roles.guard';
+import { Roles } from '../../auth/decorators/roles.decorator';
 import { CreateAdminDto } from '../dto/create-admin.dto';
 import { UpdateReservationDto } from '../dto/update-reservation.dto';
 

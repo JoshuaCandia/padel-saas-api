@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AdminService } from '@/admin/admin.service';
-import { PrismaService } from '@/prisma/prisma.service';
+import { AdminService } from '../services/admin.service';
+import { PrismaService } from '@/common/infraestructure/prisma/prisma.service';
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
