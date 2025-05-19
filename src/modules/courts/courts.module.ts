@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
-import { CourtsService } from './courts.service';
-import { CourtsController } from './courts.controller';
-import { PrismaService } from '../../common/infraestructure/prisma/prisma.service';
+import { CourtsService } from './services/courts.service';
+import { CourtsRepository } from './repositories/court.repository';
+import { CourtValidatorService } from './validators/court.validator';
+import { CourtsController } from './controllers/courts.controller';
+import { PrismaModule } from '@/common/infraestructure/prisma/prisma.module';
 
 @Module({
+  imports: [PrismaModule],
   controllers: [CourtsController],
-  providers: [CourtsService, PrismaService],
+  providers: [CourtsService, CourtsRepository, CourtValidatorService],
+  exports: [CourtsService],
 })
 export class CourtsModule {}

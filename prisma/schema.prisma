@@ -37,7 +37,7 @@ model Reservation {
 
 model Court {
   id           String        @id @default(uuid())
-  name         String
+  name         String        @unique
   reservations Reservation[]
 }
 

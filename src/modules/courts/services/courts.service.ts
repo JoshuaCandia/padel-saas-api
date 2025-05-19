@@ -1,18 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { CreateCourtDto } from './dto/create-court.dto';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { CreateCourtDto } from '../dto/create-court.dto';
+import { CourtsRepository } from '../repositories/court.repository';
+import { CourtValidatorService } from '../validators/court.validator';
 
 @Injectable()
 export class CourtsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private readonly repo: CourtsRepository,
+    private readonly validator: CourtValidatorService,
+  ) {}
 
-  create(data: CreateCourtDto) {
-    return this.prisma.court.create({
-      data,
-    });
+  async create(dto: CreateCourtDto) {
+    await this.validator.validateCreateCourt(dto);
+    try {
+      return await this.repo.createCourt({ name: dto.name.trim() });
+    } catch (err) {
+      throw new InternalServerErrorException('Error al crear la cancha.');
+    }
   }
 
-  findAll() {
-    return this.prisma.court.findMany();
+  async findAll() {
+    try {
+      return await this.repo.findAllCourts();
+    } catch (err) {
+      throw new InternalServerErrorException('Error al obtener las canchas.');
+    }
   }
 }
