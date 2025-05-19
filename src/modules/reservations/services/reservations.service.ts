@@ -1,14 +1,13 @@
 // src/reservations/reservations.service.ts
-
 import { Injectable } from '@nestjs/common';
 import { CreateReservationDto } from '../dto/create-reservation.dto';
-import { PrismaService } from '@/common/infraestructure/prisma/prisma.service';
+import { ReservationsRepository } from '../repositories/reservations.repository';
 import { ReservationValidatorService } from '../validators/reservation-validator.service';
 
 @Injectable()
 export class ReservationsService {
   constructor(
-    private prisma: PrismaService,
+    private repository: ReservationsRepository,
     private validator: ReservationValidatorService,
   ) {}
 
@@ -22,17 +21,15 @@ export class ReservationsService {
 
     await this.validator.validateAvailability(dto.courtId, start, end);
 
-    return this.prisma.reservation.create({
-      data: {
-        ...dto,
-        start,
-        end,
-      },
+    return this.repository.create({
+      ...dto,
+      start,
+      end,
     });
   }
 
   async findAll() {
-    return this.prisma.reservation.findMany();
+    return this.repository.findAll();
   }
 
   async findByDate(start: string) {
@@ -44,13 +41,6 @@ export class ReservationsService {
     const endDate = new Date(startDate);
     endDate.setHours(23, 59, 59, 999);
 
-    return this.prisma.reservation.findMany({
-      where: {
-        start: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
-    });
+    return this.repository.findByDateRange(startDate, endDate);
   }
 }

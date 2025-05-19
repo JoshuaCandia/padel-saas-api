@@ -35,3 +35,14 @@ export class CreateReservationDto {
   @IsNotEmpty()
   courtId: string;
 }
+
+export type ReservationInput = {
+  start: Date;
+  end: Date;
+  isPermanent: boolean;
+  phone: string;
+  name: string;
+  surname: string;
+  email: string;
+  courtId: string;
+};
