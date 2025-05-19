@@ -2,7 +2,7 @@
 
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
-import { PrismaService } from '@/modules/prisma/prisma.service';
+import { PrismaService } from '@/common/infraestructure/prisma/prisma.service';
 import { ReservationValidatorService } from '@/common/services/reservation-validator.service';
 
 @Injectable()

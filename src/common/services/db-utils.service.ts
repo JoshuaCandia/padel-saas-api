@@ -1,5 +1,5 @@
 import { NotFoundException } from '@nestjs/common';
-import { PrismaService } from '@/modules/prisma/prisma.service';
+import { PrismaService } from '@/common/infraestructure/prisma/prisma.service';
 
 export class DbUtilsService {
   constructor(private prisma: PrismaService) {}
