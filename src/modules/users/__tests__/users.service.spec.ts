@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from '@/users/users.service';
-import { PrismaService } from '@/prisma/prisma.service';
+import { UsersService } from '../services/users.service';
+import { PrismaService } from '@/common/infraestructure/prisma/prisma.service';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -28,10 +28,11 @@ describe('UsersService', () => {
 
   it('should create a user', async () => {
     const createDto = {
-      email: 'test@example.com',
-      phone: '1234567890',
-      name: 'Test',
-      surname: 'User',
+      phone: '+541123456789',
+      name: 'Juan',
+      surname: 'Pérez',
+      email: 'juan.perez@example.com',
+      password: 'StrongPassword123!',
     };
 
     const mockUser = {
@@ -71,10 +72,10 @@ describe('UsersService', () => {
     };
     (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
 
-    const result = await service.findByPhone('1234567890');
+    const result = await service.findByEmail('');
     expect(result).toEqual(mockUser);
     expect(prisma.user.findUnique).toHaveBeenCalledWith({
-      where: { phone: '1234567890' },
+      where: { phone: 'juan.perez@example.com' },
     });
   });
 });

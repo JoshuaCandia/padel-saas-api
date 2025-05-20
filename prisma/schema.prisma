@@ -36,9 +36,21 @@ model Reservation {
 }
 
 model Court {
-  id           String        @id @default(uuid())
-  name         String        @unique
+  id           String         @id @default(uuid())
+  name         String         @unique
+  isIndoor     Boolean
+  isActive     Boolean
+  hourlyRate   Int
+  features     CourtFeature[]
   reservations Reservation[]
+}
+
+enum CourtFeature {
+  LIGHTING
+  COVERED
+  LOCKERS
+  SHOWERS
+  PARKING
 }
 
 enum Role {

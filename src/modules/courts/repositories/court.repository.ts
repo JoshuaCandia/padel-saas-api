@@ -1,17 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@/common/infraestructure/prisma/prisma.service';
-import { Prisma, Court } from '@prisma/client';
+import { Court, CourtFeature } from '@prisma/client';
+import { CreateCourtDto } from '../dto/create-court.dto';
 
 @Injectable()
-export class CourtsRepository {
+export class CourtRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  findByName(name: string): Promise<Court | null> {
-    return this.prisma.court.findUnique({ where: { name } });
+  async findByName(name: string): Promise<Court | null> {
+    return this.prisma.court.findUnique({
+      where: { name },
+    });
   }
 
-  createCourt(data: Prisma.CourtCreateInput): Promise<Court> {
-    return this.prisma.court.create({ data });
+  async create(dto: CreateCourtDto): Promise<Court> {
+    return this.prisma.court.create({
+      data: {
+        name: dto.name,
+        isIndoor: dto.isIndoor,
+        isActive: dto.isActive ?? true,
+        hourlyRate: dto.hourlyRate,
+        features: dto.features || [],
+      },
+    });
   }
 
   findAllCourts(): Promise<Court[]> {

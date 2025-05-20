@@ -1,8 +1,8 @@
 // src/reservations/__tests__/reservations.service.spec.ts
 
 import { Test, TestingModule } from '@nestjs/testing';
-import { ReservationsService } from '../reservations.service';
-import { PrismaService } from '@/prisma/prisma.service';
+import { ReservationsService } from '../services/reservations.service';
+import { PrismaService } from '@/common/infraestructure/prisma/prisma.service';
 
 describe('ReservationsService', () => {
   let service: ReservationsService;

@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ReservationsController } from '../reservations.controller';
-import { ReservationsService } from '../reservations.service';
-import { CreateReservationDto } from '../dto/create-reservation.dto';
+import { ReservationsController } from '../controllers/reservations.controller';
+import { ReservationsService } from '../services/reservations.service';
 
 describe('ReservationsController', () => {
   let controller: ReservationsController;
@@ -9,10 +8,10 @@ describe('ReservationsController', () => {
 
   const mockService = {
     createReservation: jest.fn(),
-    findAll: jest.fn(), // match con controlador
+    findAll: jest.fn(),
     updateReservation: jest.fn(),
     deleteReservation: jest.fn(),
-    removeReservation: jest.fn(), // match con controlador
+    removeReservation: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -38,7 +37,8 @@ describe('ReservationsController', () => {
     const dto = {
       courtId: '1',
       date: '2025-05-20',
-      time: '18:00',
+      start: '2025-06-20T11:00:00.000Z',
+      end: '2025-06-20T12:30:00.000Z',
       phone: '1234567890',
       name: 'Juan',
       surname: 'Pérez',
